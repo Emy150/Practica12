@@ -1,0 +1,33 @@
+package com.example.GameVault.repository;
+
+import com.example.GameVault.model.Juego;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+// La clase debe ser interfaz
+@Repository // parametros (modelo, tipo id)
+public interface JuegoRepository extends JpaRepository<Juego, Long> {
+
+
+    // Es el equivalente a un SELECT * FROM juegos WHERE titulo LIKE '$titlo$' Busca por titulo en específico
+    List<Juego> findByTituloContainingIgnoreCase(String titulo);
+
+    // Ejemplo 2: Si tuvieramos un campo 'genero', buscar todos los de un género específico.
+    // List<Juego> findByGenero(String genero);
+
+    // Ejemplo 3: Si tuviéramos 'precio' y quisiéramos juegos más baratos que X.
+    // List<Juego> findByPrecioLessThan(Double precio);
+
+    // Ejemplo 4: Si tuviéramos 'activo' (boolean).
+    // List<Juego> findByActivoTrue();
+
+    //AQUI TRABAJAMOS SOBRE CLASES NO SOBRE TABLAS (EL NOMBRE DE MI OBJETO)
+//    @Query("SELECT j FROM Juego WHERE LOWER(j.descripcion) LIKE LOWER(CONCAT('%', :palabra, '%') )")
+//    List<Juego> buscarJuegoPor(@Param("palabra") String palabra);
+
+
+}
